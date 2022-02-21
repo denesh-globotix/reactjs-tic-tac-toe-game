@@ -1,27 +1,40 @@
-import React from 'react';
+import React from 'react'
 import ReactDOM from 'react-dom';
-import './index.css';
+import './index.css'
 
+// This is a controlled component
 class Square extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: null,
-    };
-  }
-  
   render() {
     return (
-      <button className="square" onClick={function () { console.log('click'); }}>
-        { this.props.value }
-      </button >
+      <button 
+      className="square"
+      onClick={() => {this.props.onClick();}}
+      >
+        {this.props.value}
+      </button>
     );
   }
 }
 
 class Board extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      squares: Array(9).fill(null),
+    };
+  }
+
+  handleClick(i) {
+    const squares = this.state.squares.slice();
+    squares[i] = 'X';
+    this.setState({squares: squares});
+  }
+
   renderSquare(i) {
-    return <Square value={i} />;
+    return <Square 
+    value={this.state.squares[i]}
+    onClick={() => {this.handleClick(i)}}
+    />;
   }
 
   render() {
