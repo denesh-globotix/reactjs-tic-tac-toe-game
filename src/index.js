@@ -3,17 +3,15 @@ import ReactDOM from 'react-dom';
 import './index.css'
 
 // This is a controlled component
-class Square extends React.Component {
-  render() {
-    return (
-      <button 
+function Square(props) {
+  return (
+    <button
       className="square"
-      onClick={() => {this.props.onClick();}}
-      >
-        {this.props.value}
-      </button>
-    );
-  }
+      onClick={() => {props.onClick();}}
+    >
+      {props.value}
+    </button>
+  );
 }
 
 class Board extends React.Component {
@@ -27,13 +25,13 @@ class Board extends React.Component {
   handleClick(i) {
     const squares = this.state.squares.slice();
     squares[i] = 'X';
-    this.setState({squares: squares});
+    this.setState({ squares: squares });
   }
 
   renderSquare(i) {
-    return <Square 
-    value={this.state.squares[i]}
-    onClick={() => {this.handleClick(i)}}
+    return <Square
+      value={this.state.squares[i]}
+      onClick={() => { this.handleClick(i) }}
     />;
   }
 
